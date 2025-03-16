@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trang Bán Sách</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        function toggleMenu() {
+            let menu = document.getElementById('categoryMenu');
+            menu.classList.toggle('hidden'); 
+        }
+        function toggleMenu1() {
+            let menu = document.getElementById('categoryMenu1');
+            menu.classList.toggle('hidden'); 
+        }
+        function toggleMenu2() {
+            let menu = document.getElementById('categoryMenu2');
+            menu.classList.toggle('hidden'); 
+        }
+        function toggleMenu3() {
+            let menu = document.getElementById('categoryMenu3');
+            menu.classList.toggle('hidden'); 
+        }
+        function removeItem(event) {
+            event.target.closest('.cart-item').remove();
+            updateTotal();
+        }
+        function updateTotal() {
+            let total = 0;
+            document.querySelectorAll('.cart-item').forEach(item => {
+                let price = parseFloat(item.dataset.price);
+                let quantity = parseInt(item.querySelector('.quantity').value);
+                total += price * quantity;
+            });
+            document.getElementById('totalPrice').textContent = `Tổng: ${total.toLocaleString()} VND`;
+        }
+    </script>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Trang Bán Sách</title>
+        <script src="https://cdn.tailwindcss.com"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+        <style>
+            .truncate-text {
+                overflow: hidden;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+                display: block;
+            }
+            .center-image {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+            .right-login{
+                display: flex;
+                justify-content: right;
+                align-items: right;
+            }
+        </style>
+    </head>
+</head>
+<body class="bg-gray-100 flex flex-col min-h-screen">
+    <header class="bg-blue-600 text-white p-4 text-center font-bold" style="font-size: xx-large;">
+        <a href="./home.html">Cửa Hàng Sách Online</a>
+     
+        <nav class="text-xs font-semibold right-login">
+            <ul class = "flex space-x-6 ">
+                <li><a href="./login.html" >Đăng nhập</a></li>
+                <li><a href="./register.html" >Đăng kí</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <nav class="bg-white shadow-md p-4 flex justify-between items-center">
+        <ul class="flex space-x-6">
+            <div><li><button onclick="toggleMenu()" class="text-xs font-semibold hover:text-blue-600">Danh Mục</button></li>
+                <ul id="categoryMenu" class="absolute left-0 mt-2 bg-white shadow-md rounded hidden w-48">
+                    <li class="px-4 py-2 hover:bg-gray-200 cursor-pointer">Sách Văn Học</li>
+                    <li class="px-4 py-2 hover:bg-gray-200 cursor-pointer">Sách Kinh Tế</li>
+                    <li class="px-4 py-2 hover:bg-gray-200 cursor-pointer">Sách Khoa Học</li>
+                    <li class="px-4 py-2 hover:bg-gray-200 cursor-pointer">Sách Thiếu Nhi</li>
+                </ul></div>
+            <div><li><button onclick="toggleMenu1()" class="text-xs font-semibold hover:text-blue-600">Tin Tức</button></li>
+                <ul id="categoryMenu1" class="absolute left-30 mt-2 bg-white shadow-md rounded hidden w-48">
+                    <li class="px-4 py-2 hover:bg-gray-200 cursor-pointer">Sách mới sắp ra mắt</li>
+                    <li class="px-4 py-2 hover:bg-gray-200 cursor-pointer">Lịch ra sách trong tháng</li>
+                </ul>
+            </div>
+            <div><li><button onclick="toggleMenu2()" class="text-xs font-semibold hover:text-blue-600">Liên Hệ</button></li>
+                <ul id="categoryMenu2" class="absolute left-30 mt-2 bg-white shadow-md rounded hidden w-48">
+                    <li class="px-4 py-2 hover:bg-gray-200 cursor-pointer">Email: abc@gmail.com</li>
+                    <li class="px-4 py-2 hover:bg-gray-200 cursor-pointer">Sdt: 01122345678</li>
+                </ul>
+            </div>
+            <div><li><button onclick="toggleMenu3()" class="text-xs font-semibold hover:text-blue-600">Khuyến Mãi</button></li>
+                <ul id="categoryMenu3" class="absolute left-30 mt-2 bg-white shadow-md rounded hidden w-48">
+                    <li class="px-4 py-2 hover:bg-gray-200 cursor-pointer">Thông báo</li>
+                </ul>
+            </div>
+        </ul>
+        <div class="relative w-1/3 ml-6">
+            <input type="text" placeholder="Tìm kiếm sách..." class="border px-4 py-2 rounded w-full pr-10">
+            <button class="absolute right-2 top-1/2 transform -translate-y-1/2 text-gray-500">
+                <i class="fas fa-search"></i>
+            </button>
+        </div>
+        <a href="./user.html"><img src="../FE demo/static/user.png" style="width:40px; height: 40px;"></a>
+
+        <a href="./cart.html"><button class="bg-blue-600 text-white px-4 py-2 rounded">Giỏ Hàng</button></a>
+    </nav>
+    
+    <main class="container mx-auto mt-20 p-4 flex-1">
+        <h2 class="text-2xl font-bold text-blue-600 mb-4">Giỏ Hàng</h2>
+        <div class="bg-white p-8 rounded-lg shadow-md">
+            <div id="cartList">
+                <div class="cart-item border-b border-gray-200 py-4 flex justify-between items-center" data-price="150000">
+                    <img src="../FE demo/static/bbtmh.jpg" alt="Sách A" class="w-28 h-36 mr-4 rounded">
+                    <span class="text-lg">Sách A</span>
+                    <input type="number" class="quantity w-16 border px-2 py-1 rounded" value="1" min="1" onchange="updateTotal()">
+                    <span class="text-lg">150,000 VND</span>
+                    <button onclick="removeItem(event)" class="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-700">Xóa</button>
+                </div>
+                <div class="cart-item border-b border-gray-200 py-4 flex justify-between items-center" data-price="200000">
+                    <img src="../FE demo/static/cgdthq.jpg" alt="Sách A" class="w-28 h-36 mr-4 rounded">
+                    <span class="text-lg">Sách B</span>
+                    <input type="number" class="quantity w-16 border px-2 py-1 rounded" value="1" min="1" onchange="updateTotal()">
+                    <span class="text-lg">200,000 VND</span>
+                    <button onclick="removeItem(event)" class="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-700">Xóa</button>
+                </div>
+            </div>
+            <p id="totalPrice" class="text-lg font-bold mt-4">Tổng: 350,000 VND</p>
+            <a href="./payment.html"><button class="mt-4 bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700 transition">Thanh Toán</button></a>
+        </div>
+        
+    </main>
+    
+    <footer class="bg-blue-600 text-white p-4 text-center mt-6 bottom-0 left-0">
+        &copy; 2025 Cửa Hàng Sách Online. All rights reserved.
+    </footer>
+</body>
+</html>

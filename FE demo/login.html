@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đăng Nhập</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        function handleLogin(event) {
+            event.preventDefault(); // Ngăn chặn reload trang
+            window.location.href = "home.html"; // Chuyển hướng về trang chính
+        }
+    </script>
+    <script>
+        function toggleMenu() {
+            let menu = document.getElementById('categoryMenu');
+            menu.classList.toggle('hidden'); 
+        }
+        function toggleMenu1() {
+            let menu = document.getElementById('categoryMenu1');
+            menu.classList.toggle('hidden'); 
+        }
+        function toggleMenu2() {
+            let menu = document.getElementById('categoryMenu2');
+            menu.classList.toggle('hidden'); 
+        }
+        function toggleMenu3() {
+            let menu = document.getElementById('categoryMenu3');
+            menu.classList.toggle('hidden'); 
+        }
+    </script>
+    <style>
+        .right-login{
+            display: flex;
+            justify-content: right;
+            align-items: right;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 flex flex-col items-center justify-center h-screen">
+    <header class="bg-blue-600 text-white p-4 text-center font-bold w-full fixed top-0 left-0" style="font-size: xx-large;">        
+        <a href="./home.html">Cửa Hàng Sách Online</a>
+        <nav class="text-xs font-semibold right-login">
+            <ul class="flex space-x-6 right-login">
+                <li><a href="./login.html">Đăng nhập</a></li>
+                <li><a href="./register.html">Đăng kí</a></li>
+            </ul>
+        </nav>
+    </header>
+    <div class="bg-white p-8 rounded-lg shadow-md w-96 mt-10">
+        <h2 class="text-2xl font-bold text-center text-blue-600 mb-4">Đăng Nhập</h2>
+        <form onsubmit="handleLogin(event)" class="space-y-4 w-full">
+            <div>
+                <label for="email" class="block text-gray-700">Email</label>
+                <input type="email" id="email" name="email" required 
+                    class="w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-400">
+            </div>
+            <div>
+                <label for="password" class="block text-gray-700">Mật khẩu</label>
+                <input type="password" id="password" name="password" required 
+                    class="w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-400">
+            </div>
+            <button type="submit" 
+                class="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700 transition">
+                Đăng Nhập
+            </button>
+            <p class="text-center text-gray-600 mt-2">
+                Chưa có tài khoản? <a href="register.html" class="text-blue-600 hover:underline">Đăng ký</a>
+            </p>
+        </form>
+    </div>
+</body>
+</html>

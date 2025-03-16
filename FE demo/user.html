@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trang Bán Sách</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        function toggleMenu() {
+            let menu = document.getElementById('categoryMenu');
+            menu.classList.toggle('hidden'); 
+        }
+        function toggleMenu1() {
+            let menu = document.getElementById('categoryMenu1');
+            menu.classList.toggle('hidden'); 
+        }
+        function toggleMenu2() {
+            let menu = document.getElementById('categoryMenu2');
+            menu.classList.toggle('hidden'); 
+        }
+        function toggleMenu3() {
+            let menu = document.getElementById('categoryMenu3');
+            menu.classList.toggle('hidden'); 
+        }
+        function removeItem(event) {
+            event.target.closest('.cart-item').remove();
+            updateTotal();
+        }
+        function updateTotal() {
+            let total = 0;
+            document.querySelectorAll('.cart-item').forEach(item => {
+                let price = parseFloat(item.dataset.price);
+                let quantity = parseInt(item.querySelector('.quantity').value);
+                total += price * quantity;
+            });
+            document.getElementById('totalPrice').textContent = `Tổng: ${total.toLocaleString()} VND`;
+        }
+        function applyDiscount() {
+            let discountCode = document.getElementById('discountCode').value;
+            let total = parseFloat(document.getElementById('totalPrice').dataset.total);
+            let discount = 0;
+            if (discountCode === "SALE10") {
+                discount = total * 0.1;
+            }
+            let finalTotal = total - discount + 30000; // Phí ship cố định 30,000 VND
+            document.getElementById('discountAmount').textContent = `- ${discount.toLocaleString()} VND`;
+            document.getElementById('finalTotal').textContent = `${finalTotal.toLocaleString()} VND`;
+        }
+    </script>
+    <script>
+        function toggleEdit() {
+            document.getElementById('infoDisplay').classList.toggle('hidden');
+            document.getElementById('infoEdit').classList.toggle('hidden');
+        }
+    </script>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Trang Bán Sách</title>
+        <script src="https://cdn.tailwindcss.com"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+        <style>
+            .truncate-text {
+                overflow: hidden;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+                display: block;
+            }
+            .center-image {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+            .right-login{
+                display: flex;
+                justify-content: right;
+                align-items: right;
+            }
+        </style>
+    </head>
+</head>
+<body class="bg-gray-100 flex flex-col min-h-screen">
+    <header class="bg-blue-600 text-white p-4 text-center font-bold" style="font-size: xx-large;">
+        <a href="./home.html">Cửa Hàng Sách Online</a>
+     
+        <nav class="text-xs font-semibold right-login">
+            <ul class = "flex space-x-6 ">
+                <li><a href="./login.html" >Đăng nhập</a></li>
+                <li><a href="./register.html" >Đăng kí</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <nav class="bg-white shadow-md p-4 flex justify-between items-center">
+        <ul class="flex space-x-6">
+            <div><li><button onclick="toggleMenu()" class="text-xs font-semibold hover:text-blue-600">Danh Mục</button></li>
+                <ul id="categoryMenu" class="absolute left-0 mt-2 bg-white shadow-md rounded hidden w-48">
+                    <li class="px-4 py-2 hover:bg-gray-200 cursor-pointer">Sách Văn Học</li>
+                    <li class="px-4 py-2 hover:bg-gray-200 cursor-pointer">Sách Kinh Tế</li>
+                    <li class="px-4 py-2 hover:bg-gray-200 cursor-pointer">Sách Khoa Học</li>
+                    <li class="px-4 py-2 hover:bg-gray-200 cursor-pointer">Sách Thiếu Nhi</li>
+                </ul></div>
+            <div><li><button onclick="toggleMenu1()" class="text-xs font-semibold hover:text-blue-600">Tin Tức</button></li>
+                <ul id="categoryMenu1" class="absolute left-30 mt-2 bg-white shadow-md rounded hidden w-48">
+                    <li class="px-4 py-2 hover:bg-gray-200 cursor-pointer">Sách mới sắp ra mắt</li>
+                    <li class="px-4 py-2 hover:bg-gray-200 cursor-pointer">Lịch ra sách trong tháng</li>
+                </ul>
+            </div>
+            <div><li><button onclick="toggleMenu2()" class="text-xs font-semibold hover:text-blue-600">Liên Hệ</button></li>
+                <ul id="categoryMenu2" class="absolute left-30 mt-2 bg-white shadow-md rounded hidden w-48">
+                    <li class="px-4 py-2 hover:bg-gray-200 cursor-pointer">Email: abc@gmail.com</li>
+                    <li class="px-4 py-2 hover:bg-gray-200 cursor-pointer">Sdt: 01122345678</li>
+                </ul>
+            </div>
+            <div><li><button onclick="toggleMenu3()" class="text-xs font-semibold hover:text-blue-600">Khuyến Mãi</button></li>
+                <ul id="categoryMenu3" class="absolute left-30 mt-2 bg-white shadow-md rounded hidden w-48">
+                    <li class="px-4 py-2 hover:bg-gray-200 cursor-pointer">Thông báo</li>
+                </ul>
+            </div>
+        </ul>
+        <div class="relative w-1/3 ml-6">
+            <input type="text" placeholder="Tìm kiếm sách..." class="border px-4 py-2 rounded w-full pr-10">
+            <button class="absolute right-2 top-1/2 transform -translate-y-1/2 text-gray-500">
+                <i class="fas fa-search"></i>
+            </button>
+        </div>
+        <a href="./user.html"><img src="../FE demo/static/user.png" style="width:40px; height: 40px;"></a>
+
+        <a href="./cart.html"><button class="bg-blue-600 text-white px-4 py-2 rounded">Giỏ Hàng</button></a>
+    </nav>
+    
+    <main class="container mx-auto mt-20 p-4">
+        <h2 class="text-2xl font-bold text-blue-600 mb-4">Hồ sơ cá nhân</h2>
+        <div class="bg-white p-8 rounded-lg shadow-md">
+            <div id="infoDisplay" class="mb-4">
+                <h3 class="text-xl font-semibold mb-2">Thông tin cá nhân</h3>
+                <p><strong>Họ và Tên:</strong> Nguyễn Văn A</p>
+                <p><strong>Email:</strong> nguyenvana@example.com</p>
+                <p><strong>Số điện thoại:</strong> 0123 456 789</p>
+                <p><strong>Địa chỉ:</strong> 123 Đường ABC, Quận XYZ, TP.HCM</p>
+            </div>
+            <div id="infoEdit" class="mb-4 hidden">
+                <h3 class="text-xl font-semibold mb-2">Chỉnh sửa thông tin</h3>
+                <input type="text" class="border p-2 w-full mb-2" placeholder="Họ và Tên" value="Nguyễn Văn A">
+                <input type="email" class="border p-2 w-full mb-2" placeholder="Email" value="nguyenvana@example.com">
+                <input type="text" class="border p-2 w-full mb-2" placeholder="Số điện thoại" value="0123 456 789">
+                <input type="text" class="border p-2 w-full mb-2" placeholder="Địa chỉ" value="123 Đường ABC, Quận XYZ, TP.HCM">
+                <button onclick="toggleEdit()" class="mt-2 bg-green-600 text-white py-2 px-4 rounded hover:bg-green-700 transition">Lưu</button>
+            </div>
+            <div class="mb-4">
+                <h3 class="text-xl font-semibold mb-2">Lịch sử đơn hàng</h3>
+                <ul class="border p-4 rounded-lg">
+                    <li class="border-b py-2">Đơn hàng #12345 - 500,000 VND - Đang giao</li>
+                    <li class="border-b py-2">Đơn hàng #12344 - 350,000 VND - Hoàn thành</li>
+                    <li class="border-b py-2">Đơn hàng #12343 - 420,000 VND - Đã hủy</li>
+                </ul>
+            </div>
+            <div>
+                <h3 class="text-xl font-semibold mb-2">Cài đặt tài khoản</h3>
+                <button onclick="toggleEdit()" class="mt-2 bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700 transition">Chỉnh sửa thông tin</button>
+                <button class="mt-2 bg-red-600 text-white py-2 px-4 rounded hover:bg-red-700 transition">Đăng xuất</button>
+            </div>
+        </div>
+    </main>
+    <footer class="bg-blue-600 text-white p-4 text-center mt-6 bottom-0 left-0">
+        &copy; 2025 Cửa Hàng Sách Online. All rights reserved.
+    </footer>
+</body>
+</html>

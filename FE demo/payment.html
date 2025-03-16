@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trang Bán Sách</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        function toggleMenu() {
+            let menu = document.getElementById('categoryMenu');
+            menu.classList.toggle('hidden'); 
+        }
+        function toggleMenu1() {
+            let menu = document.getElementById('categoryMenu1');
+            menu.classList.toggle('hidden'); 
+        }
+        function toggleMenu2() {
+            let menu = document.getElementById('categoryMenu2');
+            menu.classList.toggle('hidden'); 
+        }
+        function toggleMenu3() {
+            let menu = document.getElementById('categoryMenu3');
+            menu.classList.toggle('hidden'); 
+        }
+        function removeItem(event) {
+            event.target.closest('.cart-item').remove();
+            updateTotal();
+        }
+        function updateTotal() {
+            let total = 0;
+            document.querySelectorAll('.cart-item').forEach(item => {
+                let price = parseFloat(item.dataset.price);
+                let quantity = parseInt(item.querySelector('.quantity').value);
+                total += price * quantity;
+            });
+            document.getElementById('totalPrice').textContent = `Tổng: ${total.toLocaleString()} VND`;
+        }
+        function applyDiscount() {
+            let discountCode = document.getElementById('discountCode').value;
+            let total = parseFloat(document.getElementById('totalPrice').dataset.total);
+            let discount = 0;
+            if (discountCode === "SALE10") {
+                discount = total * 0.1;
+            }
+            let finalTotal = total - discount + 30000; // Phí ship cố định 30,000 VND
+            document.getElementById('discountAmount').textContent = `- ${discount.toLocaleString()} VND`;
+            document.getElementById('finalTotal').textContent = `${finalTotal.toLocaleString()} VND`;
+        }
+    </script>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Trang Bán Sách</title>
+        <script src="https://cdn.tailwindcss.com"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+        <style>
+            .truncate-text {
+                overflow: hidden;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+                display: block;
+            }
+            .center-image {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+            .right-login{
+                display: flex;
+                justify-content: right;
+                align-items: right;
+            }
+        </style>
+    </head>
+</head>
+<body class="bg-gray-100 flex flex-col min-h-screen">
+    <header class="bg-blue-600 text-white p-4 text-center font-bold" style="font-size: xx-large;">
+        <a href="./home.html">Cửa Hàng Sách Online</a>
+     
+        <nav class="text-xs font-semibold right-login">
+            <ul class = "flex space-x-6 ">
+                <li><a href="./login.html" >Đăng nhập</a></li>
+                <li><a href="./register.html" >Đăng kí</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <nav class="bg-white shadow-md p-4 flex justify-between items-center">
+        <ul class="flex space-x-6">
+            <div><li><button onclick="toggleMenu()" class="text-xs font-semibold hover:text-blue-600">Danh Mục</button></li>
+                <ul id="categoryMenu" class="absolute left-0 mt-2 bg-white shadow-md rounded hidden w-48">
+                    <li class="px-4 py-2 hover:bg-gray-200 cursor-pointer">Sách Văn Học</li>
+                    <li class="px-4 py-2 hover:bg-gray-200 cursor-pointer">Sách Kinh Tế</li>
+                    <li class="px-4 py-2 hover:bg-gray-200 cursor-pointer">Sách Khoa Học</li>
+                    <li class="px-4 py-2 hover:bg-gray-200 cursor-pointer">Sách Thiếu Nhi</li>
+                </ul></div>
+            <div><li><button onclick="toggleMenu1()" class="text-xs font-semibold hover:text-blue-600">Tin Tức</button></li>
+                <ul id="categoryMenu1" class="absolute left-30 mt-2 bg-white shadow-md rounded hidden w-48">
+                    <li class="px-4 py-2 hover:bg-gray-200 cursor-pointer">Sách mới sắp ra mắt</li>
+                    <li class="px-4 py-2 hover:bg-gray-200 cursor-pointer">Lịch ra sách trong tháng</li>
+                </ul>
+            </div>
+            <div><li><button onclick="toggleMenu2()" class="text-xs font-semibold hover:text-blue-600">Liên Hệ</button></li>
+                <ul id="categoryMenu2" class="absolute left-30 mt-2 bg-white shadow-md rounded hidden w-48">
+                    <li class="px-4 py-2 hover:bg-gray-200 cursor-pointer">Email: abc@gmail.com</li>
+                    <li class="px-4 py-2 hover:bg-gray-200 cursor-pointer">Sdt: 01122345678</li>
+                </ul>
+            </div>
+            <div><li><button onclick="toggleMenu3()" class="text-xs font-semibold hover:text-blue-600">Khuyến Mãi</button></li>
+                <ul id="categoryMenu3" class="absolute left-30 mt-2 bg-white shadow-md rounded hidden w-48">
+                    <li class="px-4 py-2 hover:bg-gray-200 cursor-pointer">Thông báo</li>
+                </ul>
+            </div>
+        </ul>
+        <div class="relative w-1/3 ml-6">
+            <input type="text" placeholder="Tìm kiếm sách..." class="border px-4 py-2 rounded w-full pr-10">
+            <button class="absolute right-2 top-1/2 transform -translate-y-1/2 text-gray-500">
+                <i class="fas fa-search"></i>
+            </button>
+        </div>
+        <a href="./user.html"><img src="../FE demo/static/user.png" style="width:40px; height: 40px;"></a>
+
+        <a href="./cart.html"><button class="bg-blue-600 text-white px-4 py-2 rounded">Giỏ Hàng</button></a>
+    </nav>
+    
+    <main class="container mx-auto mt-20 p-4 flex-1">
+        <h2 class="text-2xl font-bold text-blue-600 mb-4">Thanh Toán</h2>
+        <div class="bg-white p-8 rounded-lg shadow-md">
+            <div class="mt-4">
+                <h3 class="text-xl font-semibold mb-2">Thông tin người nhận</h3>
+                <p class="border p-2 w-full rounded mb-2">Nguyễn Văn A</p>
+                <p class="border p-2 w-full rounded mb-2">0123 456 789</p>
+                <p class="border p-2 w-full rounded">123 Đường ABC, Quận XYZ, Hà Nội</p>
+            </div>
+            <div>
+                <h3 class="text-xl font-semibold mb-2">Thông tin sản phẩm</h3>
+                <div class="border-b border-gray-200 py-2 flex justify-between">
+                    <img src="../FE demo/static/bbtmh.jpg" alt="Sách A" class="w-28 h-36 mr-4 rounded">
+                    <span>Sách A</span>
+                    <span>Số lượng: 1</span>
+                    <span>150,000 VND</span>
+                </div>
+                <div class="border-b border-gray-200 py-2 flex justify-between">
+                    <img src="../FE demo/static/cgdthq.jpg" alt="Sách A" class="w-28 h-36 mr-4 rounded">
+                    <span>Sách B</span>
+                    <span>Số lượng: 1</span>
+                    <span>200,000 VND</span>
+                </div>
+            </div>
+            <div class="mt-4">
+                <h3 class="text-xl font-semibold mb-2">Mã giảm giá</h3>
+                <input type="text" id="discountCode" class="border p-2 w-full rounded" placeholder="Nhập mã giảm giá">
+                <button onclick="applyDiscount()" class="mt-2 bg-green-600 text-white py-2 px-4 rounded hover:bg-green-700 transition">Áp dụng</button>
+            </div>
+            <div class="mt-4">
+                <h3 class="text-xl font-semibold mb-2">Tóm tắt đơn hàng</h3>
+                <div class="flex justify-between">
+                    <span>Tổng tiền hàng:</span>
+                    <span id="totalPrice" data-total="350000">350,000 VND</span>
+                </div>
+                <div class="flex justify-between">
+                    <span>Giảm giá:</span>
+                    <span id="discountAmount">- 0 VND</span>
+                </div>
+                <div class="flex justify-between">
+                    <span>Phí vận chuyển:</span>
+                    <span>30,000 VND</span>
+                </div>
+                <div class="flex justify-between font-bold text-lg mt-2">
+                    <span>Tổng cộng:</span>
+                    <span id="finalTotal">380,000 VND</span>
+                </div>
+            </div>
+            <button class="mt-4 bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700 transition w-full">Xác nhận thanh toán</button>
+        </div>
+        
+    </main>
+    
+    <footer class="bg-blue-600 text-white p-4 text-center mt-6 bottom-0 left-0">
+        &copy; 2025 Cửa Hàng Sách Online. All rights reserved.
+    </footer>
+</body>
+</html>
