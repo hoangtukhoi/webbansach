@@ -131,35 +131,22 @@
     </nav>
     
     <main class="container mx-auto mt-20 p-4">
-        <h2 class="text-2xl font-bold text-blue-600 mb-4">Hồ sơ cá nhân</h2>
+        <h2 class="text-2xl font-bold text-blue-600 mb-4">Theo dõi đơn hàng</h2>
         <div class="bg-white p-8 rounded-lg shadow-md">
-            <div id="infoDisplay" class="mb-4">
-                <h3 class="text-xl font-semibold mb-2">Thông tin cá nhân</h3>
-                <p><strong>Họ và Tên:</strong> Nguyễn Văn A</p>
-                <p><strong>Email:</strong> nguyenvana@example.com</p>
-                <p><strong>Số điện thoại:</strong> 0123 456 789</p>
-                <p><strong>Địa chỉ:</strong> 123 Đường ABC, Quận XYZ, TP.HCM</p>
-            </div>
-            <div id="infoEdit" class="mb-4 hidden">
-                <h3 class="text-xl font-semibold mb-2">Chỉnh sửa thông tin</h3>
-                <input type="text" class="border p-2 w-full mb-2" placeholder="Họ và Tên" value="Nguyễn Văn A">
-                <input type="email" class="border p-2 w-full mb-2" placeholder="Email" value="nguyenvana@example.com">
-                <input type="text" class="border p-2 w-full mb-2" placeholder="Số điện thoại" value="0123 456 789">
-                <input type="text" class="border p-2 w-full mb-2" placeholder="Địa chỉ" value="123 Đường ABC, Quận XYZ, TP.HCM">
-                <button onclick="toggleEdit()" class="mt-2 bg-green-600 text-white py-2 px-4 rounded hover:bg-green-700 transition">Lưu</button>
-            </div>
-            <div class="mb-4">
-                <h3 class="text-xl font-semibold mb-2">Lịch sử đơn hàng</h3>
+            <h3 class="text-xl font-semibold mb-4">Trạng thái đơn hàng</h3>
+            <ul class="border p-4 rounded-lg">
+                <li class="border-b py-2"><strong>Đơn hàng #12345</strong></li>
+                <li class="border-b py-2">Ngày đặt hàng: 10/03/2025</li>
+                <li class="border-b py-2">Tổng tiền: 500,000 VND</li>
+                <li class="border-b py-2">Trạng thái: <span class="text-green-600 font-semibold">Đang giao</span></li>
+            </ul>
+            <div class="mt-4">
+                <h3 class="text-xl font-semibold mb-2">Lịch trình vận chuyển</h3>
                 <ul class="border p-4 rounded-lg">
-                    <a href="./status.html"><li class="border-b py-2">Đơn hàng #12345 - 500,000 VND - Đang giao</li></a>
-                    <li class="border-b py-2">Đơn hàng #12344 - 350,000 VND - Hoàn thành</li>
-                    <li class="border-b py-2">Đơn hàng #12343 - 420,000 VND - Đã hủy</li>
+                    <li class="border-b py-2">📦 Đơn hàng đã được xác nhận</li>
+                    <li class="border-b py-2">🚚 Đơn hàng đang được vận chuyển</li>
+                    <li class="py-2 text-gray-500">🏠 Đơn hàng đã giao thành công</li>
                 </ul>
-            </div>
-            <div>
-                <h3 class="text-xl font-semibold mb-2">Cài đặt tài khoản</h3>
-                <button onclick="toggleEdit()" class="mt-2 bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700 transition">Chỉnh sửa thông tin</button>
-                <button class="mt-2 bg-red-600 text-white py-2 px-4 rounded hover:bg-red-700 transition">Đăng xuất</button>
             </div>
         </div>
     </main>
