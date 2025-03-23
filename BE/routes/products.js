@@ -32,7 +32,7 @@ router.get('/edit-product/:id', async (req, res) => {
 
         const products = await Product.find();
 
-        res.redirect('/admin',{product, products});
+        res.render('admin',{product, products});
 
    } catch (error) {
         res.status(500).send(error);
@@ -43,12 +43,12 @@ router.post('/edit-product/:id', async (req,res) => {
    const {id, name, price, description} = req.body;
     try {
         await Product.findByIdAndUpdate(req.params.id, {name, price, description});
-
+        res.redirect('/admin');
    } catch (error) {
         res.status(500).send(error);
    } 
 });
-router.post('/delete-product', async (req,res) => {
+router.post('/delete-product/:id', async (req,res) => {
    try {
         await Product.findByIdAndDelete(req.params.id);
         res.redirect('/admin');
